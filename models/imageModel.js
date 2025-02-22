@@ -22,7 +22,15 @@ const ImageSchema = new mongoose.Schema({
         maxLength:70,
         required:true,
     },
-    location:{
+    localization:{
+        type:String,
+        required:true,
+    },
+    address:{
+        type:String,
+        required:true,
+    },
+    coordinates:{
         type:String,
         required:true,
     }
