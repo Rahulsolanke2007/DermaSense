@@ -40,8 +40,12 @@ const searchHospitals = async (req, res) => {
 
   try {
     const accessToken = process.env.MAPBOX_ACCESS_TOKEN;
+
+    // Define bounding box for India (approximate values)
+    const indiaBoundingBox = '68.17665,6.74714,97.40256,35.67454'; // [westLng,southLat,eastLng,northLat]
+
     const proximity = `${lng},${lat}`;
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/hospital.json?proximity=${proximity}&limit=5&access_token=${accessToken}`;
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/hospital.json?proximity=${proximity}&bbox=${indiaBoundingBox}&limit=5&access_token=${accessToken}`;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -62,6 +66,7 @@ const searchHospitals = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch hospitals', details: error.message });
   }
 };
+
 
 
 
